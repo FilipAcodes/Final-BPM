@@ -48,7 +48,7 @@ const LikeButton = ({ songname, picture, artist }) => {
 
   return (
     <AddToLikedButton onClick={() => addToLikeList()}>
-      <StyledLikeButton likedsong={likedSong ? true : false} />
+      <StyledLikeButton likedsong={likedSong ? "true" : ""} />
     </AddToLikedButton>
   );
 };
