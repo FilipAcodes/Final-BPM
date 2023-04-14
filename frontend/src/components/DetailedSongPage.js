@@ -7,7 +7,7 @@ import DetailsForSong from "../SubComponents/SongDetailsComponents/DetailsForSon
 const DetailedSongPage = () => {
   const { songId } = useParams();
   const [songInfo, setSongInfo] = useState(null);
-  //test
+
   useEffect(() => {
     const options = {
       method: "GET",

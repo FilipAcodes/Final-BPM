@@ -33,11 +33,12 @@ const StyledCommentContainer = styled.div`
   border-radius: 8px;
   padding-left: 5px;
   overflow: auto;
-
+  margin-left: 10px;
+  margin-top: 5px;
   @media (min-width: 1571px) {
     position: absolute;
-    top: 35%;
-    left: 44%;
+    top: 7%;
+    left: 42%;
     width: 500px;
     transform: translate(-50%, -50%);
   }
@@ -47,25 +48,30 @@ const StyledCommentContainer = styled.div`
     margin-left: 10px;
     margin-top: 5px;
   }
-  @media (max-width: 1450px) and (min-width: 1251px) {
+  @media (max-width: 1450px) and (min-width: 1381px) {
     position: absolute;
-    top: 35%;
-    left: 44%;
+    top: 7%;
+    left: 42%;
     transform: translate(-50%, -50%);
     width: 400px;
   }
   @media (max-width: 1570px) and (min-width: 1451px) {
     width: 400px;
     position: absolute;
-    top: 35%;
-    left: 44%;
+    top: 7%;
+    left: 42%;
     transform: translate(-50%, -50%);
   }
-  @media (max-width: 1250px) and (min-width: 376px) {
+  @media (max-width: 1380px) and (min-width: 1340px) {
     position: absolute;
-    top: 66%;
-    left: 45%;
-    width: 50%;
-    height: 30%;
+    top: 4%;
+    left: 28%;
+    width: 380px;
+  }
+  @media (max-width: 1339px) and (min-width: 376x) {
+    position: absolute;
+    top: 4%;
+    left: 28%;
+    width: 900px;
   }
 `;

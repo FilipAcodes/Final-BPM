@@ -36,7 +36,7 @@ const DetailsForSong = ({ songName, artist, album, mp3, explicit, id }) => {
             <AlbumTitle>{album.title}</AlbumTitle>
             <AlbumImage src={album.cover_xl} alt="Album Cover"></AlbumImage>
             <AudioPlayer mp3={mp3} width={`90%`} />
-            {explicit && <p>EXPLICIT</p>}
+            {explicit && <ExplicitBold>EXPLICIT</ExplicitBold>}
           </AlbumAndPlayerContainer>
         </RightColumn>
       </StyledContainer>
@@ -143,4 +143,9 @@ const ArtistImage = styled.img`
 
 const StyledContainerForLikePlayList = styled.div`
   margin-top: 5px;
+`;
+
+const ExplicitBold = styled.p`
+  font-weight: bold;
+  margin-top: 2px;
 `;
