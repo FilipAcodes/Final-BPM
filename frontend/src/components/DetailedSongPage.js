@@ -21,7 +21,7 @@ const DetailedSongPage = () => {
       .then((response) => setSongInfo(response))
       .catch((err) => console.error(err));
   }, []);
-  console.log(songInfo.artist.id);
+
   return (
     <>
       <BackgroundImage imageURL={SongIdBg} />

@@ -4,15 +4,26 @@ import AudioPlayer from "./AudioPlayer";
 import SongAddComment from "../CommentComponents/SongAddComment";
 import LikeButton from "../LikedSongComponents/LikeButton";
 import AddToPlayList from "../PlaylistComponents/AddToPlayList";
+import { useNavigate } from "react-router-dom";
 
-const DetailsForSong = ({ songName, artist, album, mp3, explicit, id }) => {
+const DetailsForSong = ({
+  songName,
+  artist,
+  album,
+  mp3,
+  explicit,
+  id,
+  artistid,
+  albumid,
+}) => {
+  const navigate = useNavigate();
   return (
     <>
       <StyledContainer>
         <LeftColumn>
           <div>
             <SongName>{songName}</SongName>
-            <ArtistMoreInfo>
+            <ArtistMoreInfo onClick={() => navigate(`/artist/${artistid}`)}>
               <ArtistImage src={artist.picture} alt="Artist" />
             </ArtistMoreInfo>
             <StyledContainerForLikePlayList>
@@ -34,7 +45,11 @@ const DetailsForSong = ({ songName, artist, album, mp3, explicit, id }) => {
         <RightColumn>
           <AlbumAndPlayerContainer>
             <AlbumTitle>{album.title}</AlbumTitle>
-            <AlbumImage src={album.cover_xl} alt="Album Cover"></AlbumImage>
+            <AlbumImage
+              src={album.cover_xl}
+              alt="Album Cover"
+              onClick={() => navigate(`/album/${albumid}`)}
+            ></AlbumImage>
             <AudioPlayer mp3={mp3} width={`90%`} />
             {explicit && <ExplicitBold>EXPLICIT</ExplicitBold>}
           </AlbumAndPlayerContainer>
@@ -91,6 +106,9 @@ const AlbumAndPlayerContainer = styled.div`
 
 const AlbumImage = styled.img`
   max-width: 90%;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const LeftColumn = styled.div`
