@@ -1,8 +1,13 @@
 import React from "react";
 import BackgroundImage from "../SubComponents/BackgroundImage";
+import AlbumPageBg from "../Images/AlbumPageBg.jpg";
 
 const AlbumPage = () => {
-  return <div>AlbumPage</div>;
+  return (
+    <>
+      <BackgroundImage imageURL={AlbumPageBg} />
+    </>
+  );
 };
 
 export default AlbumPage;
