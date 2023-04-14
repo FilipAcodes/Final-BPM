@@ -21,7 +21,7 @@ const DetailedSongPage = () => {
       .then((response) => setSongInfo(response))
       .catch((err) => console.error(err));
   }, []);
-
+  console.log(songInfo.artist.id);
   return (
     <>
       <BackgroundImage imageURL={SongIdBg} />
@@ -33,6 +33,8 @@ const DetailedSongPage = () => {
           album={songInfo.album}
           mp3={songInfo.preview}
           id={songInfo.id}
+          artistid={songInfo.artist.id}
+          albumid={songInfo.album.id}
         />
       )}
     </>
