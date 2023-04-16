@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import ToastNotification from "../ToastNotification";
+import Loading from "../../components/Loading";
 
 const AddSongToPlaylist = ({
   id,
@@ -12,8 +13,10 @@ const AddSongToPlaylist = ({
   closeModal,
 }) => {
   const [toast, setToast] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const addSong = () => {
+    setLoading(true);
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -28,11 +31,16 @@ const AddSongToPlaylist = ({
     };
     fetch("/addplaylist", options)
       .then((response) => response.json())
-      .then((data) => setToast(true));
+      .then((data) => {
+        setLoading(false);
+        setToast(true);
+      });
   };
   return (
     <>
-      <AddSongButton onClick={addSong}>Add my song!</AddSongButton>
+      <AddSongButton onClick={addSong} disabled={loading}>
+        {loading ? <Loading /> : "Add my song!"}
+      </AddSongButton>
       <ToastNotification
         message="Song successfully added!"
         show={toast}

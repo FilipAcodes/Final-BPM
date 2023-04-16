@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
+import React, { useEffect, useRef } from "react";
+import styled, { keyframes } from "styled-components";
 
 const ToastNotification = ({
   message,
@@ -7,11 +7,16 @@ const ToastNotification = ({
   setShow,
   closeModal = () => {},
 }) => {
+  const toastRef = useRef(null);
+
   useEffect(() => {
     if (show) {
       setTimeout(() => {
-        setShow(false);
-        closeModal(false);
+        toastRef.current.classList.add("fade-out");
+        setTimeout(() => {
+          setShow(false);
+          closeModal(false);
+        }, 300);
       }, 1300);
     }
   }, [show]);
@@ -19,7 +24,7 @@ const ToastNotification = ({
   return (
     <>
       {show && (
-        <Toast show={show}>
+        <Toast ref={toastRef}>
           <p>{message}</p>
         </Toast>
       )}
@@ -28,6 +33,16 @@ const ToastNotification = ({
 };
 
 export default ToastNotification;
+
+const fadeOut = keyframes`
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+`;
 
 const Toast = styled.div`
   position: fixed;
@@ -38,7 +53,11 @@ const Toast = styled.div`
   color: #fff;
   padding: 16px;
   border-radius: 8px;
-  visibility: ${({ show }) => (show ? "visible" : "hidden")};
-  opacity: ${({ show }) => (show ? 1 : 0)};
+  opacity: 1;
+  visibility: visible;
   transition: opacity 0.3s ease-in-out;
+
+  &.fade-out {
+    animation: ${fadeOut} 0.3s ease-in-out forwards;
+  }
 `;

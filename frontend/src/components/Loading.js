@@ -1,13 +1,21 @@
 import React from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const Loading = () => {
-  return (
-    <>
-      <AiOutlineLoading3Quarters />
-    </>
-  );
+  return <RotatingLoad />;
 };
 
 export default Loading;
+
+const RotatingLoad = styled(AiOutlineLoading3Quarters)`
+  animation: ${keyframes`
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  `} 1s linear infinite;
+`;
