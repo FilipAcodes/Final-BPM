@@ -1,4 +1,5 @@
 "use strict";
+const axios = require("axios");
 
 const { MongoClient } = require("mongodb");
 require("dotenv").config();
@@ -56,18 +57,22 @@ const likeSong = async (req, res) => {
         }
       );
       client.close();
-      return res
-        .status(200)
-        .json({ status: 200, message: "Song added to liked songs!" });
+      return res.status(200).json({
+        status: 200,
+        message: "Song added to liked songs!",
+        data: true,
+      });
     } else {
       await likedSongsCollection.updateOne(
         { _id: email },
         { $pull: { likedSongs: { songid: Number(songid) } } }
       );
       client.close();
-      return res
-        .status(200)
-        .json({ status: 200, message: "Song removed from liked songs!" });
+      return res.status(200).json({
+        status: 200,
+        message: "Song removed from liked songs!",
+        data: false,
+      });
     }
   }
 };
@@ -93,6 +98,10 @@ const createPlaylist = async (req, res) => {
         "playlists.$.songs": { songName, artistName, songId, picture },
       },
     }
+  );
+
+  await axios("https://api.deezer.com/artist/27/top?limit=50").then((data) =>
+    console.log(data.data.data)
   );
 
   if (playlistsUpdateResult.modifiedCount === 1) {
@@ -161,9 +170,7 @@ const getUserLikedSong = async (req, res) => {
       .status(200)
       .json({ status: 200, message: "Song found", data: likedSong });
   } else {
-    return res
-      .status(404)
-      .json({ status: 404, message: "Song Info not found, check your id." });
+    return res.status(200).json({ status: 200, message: "Song not liked" });
   }
 };
 
@@ -232,8 +239,11 @@ const getAllCommentsOnSong = async (req, res) => {
         message: "All comments on song ",
         data: findAllComments,
       })
-    : res.status(404).json({ status: 404, message: "No song comments found" });
+    : res.status(200).json({ status: 200, message: "No song comments found" });
 };
+
+const requestArtistInfo = async (req, res) => {};
+
 module.exports = {
   likeSong,
   createPlaylist,

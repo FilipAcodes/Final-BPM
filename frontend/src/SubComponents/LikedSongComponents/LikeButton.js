@@ -9,26 +9,25 @@ const LikeButton = ({ songname, picture, artist }) => {
   const { user } = useAuth0();
   const { songId } = useParams();
   const [likedSong, setLikedSong] = useState(false);
-  const [reload, setReload] = useState(true);
   const [signedIn, setSignedIn] = useState(false);
 
   useEffect(() => {
-    setLikedSong(false);
     fetch(`/songinfo/${songId}`)
       .then((res) => res.json())
       .then((data) => {
-        if (data.status === 404) {
-          setLikedSong(false);
-        } else {
+        if (data.data) {
           setLikedSong(true);
+        } else {
+          setLikedSong(false);
         }
       });
-  }, [reload, songId]);
-  //Same deal with the removal of red
+  }, [songId]);
+
   const addToLikeList = () => {
     if (!user) {
       return setSignedIn(true);
     } else {
+      setLikedSong((prev) => !prev);
       setSignedIn(false);
       fetch("/likesong", {
         method: "PATCH",
@@ -44,11 +43,11 @@ const LikeButton = ({ songname, picture, artist }) => {
         }),
       })
         .then((response) => {
-          response.json();
+          return response.json();
         })
-        .then(() => setReload(!reload))
+        .then((data) => setLikedSong(data.data))
         .catch((error) => {
-          console.error(error);
+          window.alert(error, "Something bad happened");
         });
     }
   };

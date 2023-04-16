@@ -2,14 +2,11 @@ import { useAuth0 } from "@auth0/auth0-react";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import UserSelectedPlaylist from "./UserSelectedPlaylist";
-import Loading from "../../components/Loading";
 
 const UserPlaylist = () => {
   const { user } = useAuth0();
-  const [reload, setReload] = useState(true);
   const [userPlaylist, setUserPlaylist] = useState(null);
   const [selectedPlaylist, setSelectedPlaylist] = useState(null);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -18,24 +15,20 @@ const UserPlaylist = () => {
         .then((data) => {
           if (data.status === 200) {
             setUserPlaylist(data.data);
-            setLoading(false);
           }
         });
     }
-  }, [reload]);
-  //Annoying WEE being first when reloading..
+  }, [user]);
+
   return (
     <>
       <Title>Your Playlist:</Title>
       <OptionsForPlaylist
         id="playlist"
-        onClick={() => {
-          setLoading(true);
-          setReload(!reload);
-        }}
         onChange={(e) => setSelectedPlaylist(e.target.value)}
+        requi
       >
-        <option defaultValue disabled>
+        <option selected defaultValue="" key="default" disabled>
           Select a playlist!
         </option>
         {userPlaylist &&

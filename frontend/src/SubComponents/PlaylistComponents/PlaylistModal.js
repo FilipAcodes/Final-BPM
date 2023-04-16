@@ -7,7 +7,6 @@ import AddSongToPlaylist from "./AddSongToPlaylist";
 const Modal = ({ isOpen, onClose, id, songname, artist, picture }) => {
   const { user } = useAuth0();
   const [userPlaylist, setUserPlaylist] = useState(null);
-  const [reload, setReload] = useState(true);
   const [selectedPlaylist, setSelectedPlaylist] = useState(null);
 
   const closeModal = () => {
@@ -15,7 +14,7 @@ const Modal = ({ isOpen, onClose, id, songname, artist, picture }) => {
     setSelectedPlaylist(null);
   };
 
-  useEffect(() => {
+  const fetchPlaylist = () => {
     if (user) {
       fetch(`/userplaylists/${user.email}`)
         .then((res) => res.json())
@@ -25,7 +24,11 @@ const Modal = ({ isOpen, onClose, id, songname, artist, picture }) => {
           }
         });
     }
-  }, [reload]);
+  };
+
+  useEffect(() => {
+    fetchPlaylist();
+  }, []);
 
   return (
     <>
@@ -38,10 +41,10 @@ const Modal = ({ isOpen, onClose, id, songname, artist, picture }) => {
               <label>Choose a playlist to add it to : </label>
               <select
                 id="playlist"
-                onClick={() => setReload(!reload)}
+                onClick={fetchPlaylist}
                 onChange={(e) => setSelectedPlaylist(e.target.value)}
               >
-                <option defaultValue disabled>
+                <option defaultValue disabled selected>
                   Select a playlist!
                 </option>
                 {userPlaylist &&

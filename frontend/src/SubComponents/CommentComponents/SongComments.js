@@ -11,13 +11,9 @@ const SongComments = ({ reload }) => {
     fetch(`/comments/${songId}`)
       .then((res) => res.json())
       .then((data) => setGetComments(data.data))
-      .catch((er) => {
-        if (er) {
-          console.error(er);
-        }
-      });
+      .catch((er) => {});
   }, [reload]);
-  //Remove the console on browser, error handled arleady.
+
   return (
     <StyledCommentContainer>
       <h2>Comments:</h2>
