@@ -7,9 +7,11 @@ const options = { useNewUrlParser: true, useUnifiedTopology: true };
 //Like song
 const likeSong = async (req, res) => {
   const { email, songid, songname, picture, artist } = req.body;
+
   if (!email || !songid || !songname || !picture || !artist) {
     res.status(404).json({ status: 404, message: "Missing Data..." });
   }
+
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
   const db = client.db("finalbpm");

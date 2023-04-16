@@ -3,11 +3,13 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import SongComments from "../CommentComponents/SongComments";
+import ToastNotification from "../ToastNotification";
 
 const SongAddComment = () => {
   const { songId } = useParams();
   const [addComment, setAddComment] = useState("");
   const [reload, setReload] = useState(false);
+  const [signedIn, setSignedIn] = useState(false);
   const { user } = useAuth0();
 
   const userInput = (e) => {
@@ -16,21 +18,25 @@ const SongAddComment = () => {
 
   const submitButton = (e) => {
     e.preventDefault();
-    const options = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: user.email,
-        comment: addComment,
-        songid: songId,
-      }),
-    };
-    fetch("/comments/create", options)
-      .then((response) => response.json())
-      .then((data) => {
-        setAddComment("");
-        setReload(!reload);
-      });
+    if (!user) {
+      return setSignedIn(true);
+    } else {
+      const options = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: user.email,
+          comment: addComment,
+          songid: songId,
+        }),
+      };
+      fetch("/comments/create", options)
+        .then((response) => response.json())
+        .then((data) => {
+          setAddComment("");
+          setReload(!reload);
+        });
+    }
   };
   return (
     <>
@@ -48,6 +54,11 @@ const SongAddComment = () => {
       <div>
         <SongComments reload={reload} />
       </div>
+      <ToastNotification
+        message="Please log-in to submit your message"
+        show={signedIn}
+        setShow={setSignedIn}
+      />
     </>
   );
 };

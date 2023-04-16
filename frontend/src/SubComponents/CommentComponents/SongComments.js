@@ -10,18 +10,26 @@ const SongComments = ({ reload }) => {
   useEffect(() => {
     fetch(`/comments/${songId}`)
       .then((res) => res.json())
-      .then((data) => setGetComments(data.data));
+      .then((data) => setGetComments(data.data))
+      .catch((er) => {
+        if (er) {
+          console.error(er);
+        }
+      });
   }, [reload]);
-
+  //Remove the console on browser, error handled arleady.
   return (
     <StyledCommentContainer>
       <h2>Comments:</h2>
-      {getComments &&
+      {getComments ? (
         getComments.comments.map((comment, i) => {
           return (
             <AllComments key={i} by={comment._id} comment={comment.comment} />
           );
-        })}
+        })
+      ) : (
+        <p>Be the first one to comment!</p>
+      )}
     </StyledCommentContainer>
   );
 };
