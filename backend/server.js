@@ -1,6 +1,7 @@
 "use strict";
 const express = require("express");
 const morgan = require("morgan");
+//MongoDB endpoints
 const {
   likeSong,
   createPlaylist,
@@ -10,7 +11,13 @@ const {
   getAllCommentsOnSong,
   createCommentOnSong,
 } = require("./handlers");
-const { getTrackInfo, getSongSearch } = require("./apiCalls");
+//Deezer API calls
+const {
+  getTrackInfo,
+  getSongSearch,
+  getAlbumTracks,
+  getArtistTracks,
+} = require("./apiCalls");
 
 express()
   .use(function (req, res, next) {
@@ -38,7 +45,8 @@ express()
   .post("/comments/create", createCommentOnSong)
   .get("/deezerapi/track/:trackid", getTrackInfo)
   .get("/deezerapi/search/:query", getSongSearch)
-
+  .get("/deezerapi/album/:albumid", getAlbumTracks)
+  .get("/deezerapi/artist/:artistid", getArtistTracks)
   //-----//
   .get("*", (req, res) => {
     res.status(404).json({ status: 404, message: "This ain't it chief" });
