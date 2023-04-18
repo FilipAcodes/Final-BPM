@@ -48,7 +48,7 @@ const DetailsForSong = ({
             <AlbumImage
               src={album.cover_xl}
               alt="Album Cover"
-              onClick={() => navigate(`/artist/${albumid}`)}
+              onClick={() => navigate(`/album/${albumid}`)}
             ></AlbumImage>
             <AudioPlayer mp3={mp3} width={`90%`} />
             {explicit && <ExplicitBold>EXPLICIT</ExplicitBold>}

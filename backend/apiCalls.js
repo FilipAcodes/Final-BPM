@@ -29,7 +29,9 @@ const getAlbumTracks = async (req, res) => {
     const { data } = await axios.get(
       `https://api.deezer.com/album/${albumid}/tracks`
     );
-    res.status(200).json({ status: 200, data: data, message: "Album Info" });
+    res
+      .status(200)
+      .json({ status: 200, data: data.data, message: "Album Info" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -43,7 +45,7 @@ const getArtistTracks = async (req, res) => {
     );
     res
       .status(200)
-      .json({ status: 200, data: data, message: "Artist tracks Info" });
+      .json({ status: 200, data: data.data, message: "Artist tracks Info" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
