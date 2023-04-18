@@ -78,7 +78,7 @@ const likeSong = async (req, res) => {
 };
 //create Playlist
 const createPlaylist = async (req, res) => {
-  const { email, playlist, songName, artistName, songId, picture } = req.body; // only playlist name is required & email
+  const { email, playlist, songName, artistName, songId, picture } = req.body; // only playlist name & email is required
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
   const db = client.db("finalbpm");
@@ -98,10 +98,6 @@ const createPlaylist = async (req, res) => {
         "playlists.$.songs": { songName, artistName, songId, picture },
       },
     }
-  );
-
-  await axios("https://api.deezer.com/artist/27/top?limit=50").then((data) =>
-    console.log(data.data.data)
   );
 
   if (playlistsUpdateResult.modifiedCount === 1) {
@@ -241,8 +237,6 @@ const getAllCommentsOnSong = async (req, res) => {
       })
     : res.status(200).json({ status: 200, message: "No song comments found" });
 };
-
-const requestArtistInfo = async (req, res) => {};
 
 module.exports = {
   likeSong,

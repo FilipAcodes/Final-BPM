@@ -10,7 +10,7 @@ const {
   getAllCommentsOnSong,
   createCommentOnSong,
 } = require("./handlers");
-//addHandlers here
+const { getTrackInfo, getSongSearch } = require("./apiCalls");
 
 express()
   .use(function (req, res, next) {
@@ -29,11 +29,6 @@ express()
   .use(express.json())
   .use(express.static("public"))
   //EndPoints
-  .get("/123", (req, res) => {
-    res
-      .status(200)
-      .json({ status: 200, message: "Hello there your server works" });
-  })
   .patch("/likesong", likeSong)
   .post("/addplaylist", createPlaylist)
   .get("/songinfo/:songid", getUserLikedSong)
@@ -41,6 +36,9 @@ express()
   .get("/userplaylists/:email", getUserPlaylist)
   .get("/comments/:songid", getAllCommentsOnSong)
   .post("/comments/create", createCommentOnSong)
+  .get("/deezerapi/track/:trackid", getTrackInfo)
+  .get("/deezerapi/search/:query", getSongSearch)
+
   //-----//
   .get("*", (req, res) => {
     res.status(404).json({ status: 404, message: "This ain't it chief" });

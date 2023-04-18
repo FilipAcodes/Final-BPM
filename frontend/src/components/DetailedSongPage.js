@@ -8,29 +8,12 @@ const DetailedSongPage = () => {
   const { songId } = useParams();
   const [songInfo, setSongInfo] = useState(null);
 
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "8327104a61msh2959623d75f0426p15fb85jsnd2a851dace1e",
-      "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
-      mode: "no-cors",
-    },
-  };
-
   useEffect(() => {
-    fetch(`https://deezerdevs-deezer.p.rapidapi.com/track/${songId}`, options)
+    fetch(`/deezerapi/track/${songId}`)
       .then((response) => response.json())
-      .then((response) => setSongInfo(response))
+      .then((response) => setSongInfo(response.data))
       .catch((err) => console.error(err));
   }, []);
-  console.log(songInfo);
-  //https://api.deezer.com/album/294983402/tracks
-  // fetch("https://api.deezer.com/artist/2845441/top?limit=50")
-  //   .then((res) => {
-  //     console.log(res);
-  //     return res.json();
-  //   })
-  //   .then((data) => console.log(data));
 
   return (
     <>

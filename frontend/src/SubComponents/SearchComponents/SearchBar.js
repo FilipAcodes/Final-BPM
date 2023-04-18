@@ -12,17 +12,10 @@ const SearchBar = () => {
 
   const onClick = (e) => {
     e.preventDefault();
-    const options = {
-      method: "GET",
-      headers: {
-        "X-RapidAPI-Key": "8327104a61msh2959623d75f0426p15fb85jsnd2a851dace1e",
-        "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
-      },
-    };
 
-    fetch(`https://deezerdevs-deezer.p.rapidapi.com/search?q=${input}`, options)
+    fetch(`/deezerapi/search/${input}`)
       .then((response) => response.json())
-      .then((response) => setSearch(response.data))
+      .then((response) => setSearch(response.data.data))
       .catch((err) => console.error(err));
   };
 
