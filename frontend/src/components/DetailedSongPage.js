@@ -26,6 +26,8 @@ const DetailedSongPage = () => {
           album={songInfo.album}
           mp3={songInfo.preview}
           id={songInfo.id}
+          artistid={songInfo.artist.id}
+          albumid={songInfo.album.id}
         />
       )}
     </>
