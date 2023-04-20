@@ -15,13 +15,11 @@ const ArtistMain = () => {
       .then((res) => res.json())
       .then((data) => setArtistInfo(data.data));
   }, []);
-  //Page Logic/Divide/button count
+  //Page Logic/Divide/button count/Similar to search
   const pageCount = artistInfo ? Math.ceil(artistInfo.length / PAGE_SIZE) : 0;
   const paginatedTracks = artistInfo
     ? artistInfo.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE)
     : [];
-
-  console.log(artistInfo);
 
   return (
     <StyledContainer>
@@ -77,12 +75,23 @@ const StyledContainer = styled.div`
   width: 50%;
   height: 50%;
   overflow: auto;
+  @media (max-width: 375px) {
+    height: 600px;
+    width: 290px;
+    left: 56%;
+  }
+  @media (max-width: 966px) and (min-width: 376px) {
+    height: 700px;
+  }
 `;
 
 const StyledTitle = styled.h1`
   text-align: center;
   padding: 5px;
   font-size: 35px;
+  @media (max-width: 375px) {
+    font-size: 25px;
+  }
 `;
 
 const TrackContainer = styled.div`
@@ -91,6 +100,10 @@ const TrackContainer = styled.div`
   margin-bottom: 5px;
   display: grid;
   grid-template-columns: 1fr 1fr;
+
+  @media (max-width: 966px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const PaginationContainer = styled.div`
@@ -101,7 +114,7 @@ const PaginationContainer = styled.div`
 
 const PaginationButton = styled.button`
   background-color: #9d00ff;
-  color: white;
+  color: black;
   border: none;
   border-radius: 8px;
   padding: 5px;
