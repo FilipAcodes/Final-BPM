@@ -111,6 +111,14 @@ const SearchResultsContainer = styled.div`
   transform: translate(-50%, -50%);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  @media (max-width: 1150px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  @media (max-width: 405px) {
+    overflow: auto;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
   @media (max-width: 375px) {
     grid-template-columns: 1fr 1fr;
     overflow: auto;

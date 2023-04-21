@@ -113,4 +113,8 @@ const TrackPlacementContainer = styled.div`
   @media (max-width: 1035px) {
     grid-template-columns: 1fr;
   }
+  @media (max-width: 375px) {
+    height: 384px;
+    overflow: auto;
+  }
 `;

@@ -36,7 +36,10 @@ const SongContainer = styled.button`
   align-items: center;
   position: relative;
   @media (max-width: 1150px) {
-    height: 20vh;
+    height: 17vh;
+  }
+  @media (max-width: 816px) {
+    height: 14vh;
   }
   @media (max-width: 375px) {
     width: 35vw;
