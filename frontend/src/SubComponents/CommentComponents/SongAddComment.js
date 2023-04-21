@@ -47,7 +47,11 @@ const SongAddComment = () => {
             onChange={(e) => userInput(e)}
           ></StyledTextArea>
         </form>
-        <SubmitButton type="submit" onClick={(e) => submitButton(e)}>
+        <SubmitButton
+          type="submit"
+          onClick={(e) => submitButton(e)}
+          disabled={addComment.length < 3}
+        >
           Submit
         </SubmitButton>
       </CommentContainer>
@@ -77,6 +81,10 @@ const SubmitButton = styled.button`
     cursor: pointer;
     color: aqua;
     background-color: white;
+  }
+  &:disabled {
+    color: grey;
+    cursor: not-allowed;
   }
 `;
 
