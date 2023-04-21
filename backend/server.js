@@ -43,6 +43,7 @@ express()
   .get("/userplaylists/:email", getUserPlaylist)
   .get("/comments/:songid", getAllCommentsOnSong)
   .post("/comments/create", createCommentOnSong)
+
   .get("/deezerapi/track/:trackid", getTrackInfo)
   .get("/deezerapi/search/:query", getSongSearch)
   .get("/deezerapi/album/:albumid", getAlbumTracks)

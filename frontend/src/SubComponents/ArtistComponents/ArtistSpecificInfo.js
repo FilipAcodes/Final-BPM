@@ -35,13 +35,14 @@ const StyledButtonContainer = styled.button`
   margin-bottom: 5px;
   margin-right: 15px;
   margin-left: 15px;
-
   position: relative;
-  transition: background-color 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 
   &:hover {
     background-color: #9d00ff;
     border: 1px solid white;
+    color: black;
+    transform: scale(1.03);
   }
 `;
 
