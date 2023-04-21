@@ -31,7 +31,7 @@ const AlbumMain = () => {
         )}
       </ContainerImageTracks>
       <TrackContainer>
-        <h2>Album Tracks :</h2>
+        <AlbumTitle>Album Tracks :</AlbumTitle>
         <TrackPlacementContainer>
           {albumInfo &&
             albumInfo.map((e) => {
@@ -63,9 +63,11 @@ const StyledContainer = styled.div`
     height: 600px;
     width: 290px;
     left: 56%;
+    grid-template-columns: 1fr;
   }
   @media (max-width: 966px) and (min-width: 376px) {
     height: 700px;
+    grid-template-columns: 1fr;
   }
 `;
 
@@ -74,6 +76,12 @@ const ContainerImageTracks = styled.div`
     width: 100%;
     height: 60%;
     object-fit: contain;
+    @media (max-width: 966px) and (min-width: 376px) {
+      height: 250px;
+    }
+    @media (max-width: 375px) {
+      height: 150px;
+    }
   }
 `;
 
@@ -87,13 +95,22 @@ const ArtistName = styled.h1`
   text-align: center;
   font-size: 35px;
   margin-top: 5px;
+  @media (max-width: 375px) {
+    font-size: 25px;
+  }
 `;
 
 const AlbumTitle = styled.h2`
   text-align: center;
+  @media (max-width: 375px) {
+    font-size: 15px;
+  }
 `;
 
 const TrackPlacementContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  @media (max-width: 1035px) {
+    grid-template-columns: 1fr;
+  }
 `;
