@@ -4,15 +4,19 @@ import styled from "styled-components";
 
 const PageLoad = () => {
   return (
-    <div>
+    <LoadContainer>
       <Loading />
-    </div>
+    </LoadContainer>
   );
 };
 
 export default PageLoad;
 
 const LoadContainer = styled.div`
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;

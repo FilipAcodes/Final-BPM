@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import AlbumDetails from "./AlbumDetails";
 import styled from "styled-components";
+import PageLoad from "../../PageLoad";
 
 const AlbumMain = () => {
   const { albumId } = useParams();
   const [albumInfo, setalbumInfo] = useState(null);
   const [getAlbumInfo, setgetAlbumInfo] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch(`/deezerapi/album/${albumId}`)
@@ -16,27 +18,29 @@ const AlbumMain = () => {
         return fetch(`/deezerapi/search/${data.data[0].title}`);
       })
       .then((res) => res.json())
-      .then((data) => setgetAlbumInfo(data.data.data[0]));
+      .then((data) => {
+        setgetAlbumInfo(data.data.data[0]);
+        setLoading(false);
+      });
   }, []);
+
+  if (loading) {
+    return <PageLoad />;
+  }
 
   return (
     <StyledContainer>
       <ContainerImageTracks>
-        {getAlbumInfo && (
-          <>
-            <ArtistName>{getAlbumInfo.artist.name}</ArtistName>
-            <AlbumTitle>{getAlbumInfo.album.title}</AlbumTitle>
-            <img src={getAlbumInfo.album.cover_medium} alt="album"></img>
-          </>
-        )}
+        <ArtistName>{getAlbumInfo.artist.name}</ArtistName>
+        <AlbumTitle>{getAlbumInfo.album.title}</AlbumTitle>
+        <img src={getAlbumInfo.album.cover_medium} alt="album"></img>
       </ContainerImageTracks>
       <TrackContainer>
         <AlbumTitle>Album Tracks :</AlbumTitle>
         <TrackPlacementContainer>
-          {albumInfo &&
-            albumInfo.map((e) => {
-              return <AlbumDetails key={e.id} songid={e.id} title={e.title} />;
-            })}
+          {albumInfo.map((e) => {
+            return <AlbumDetails key={e.id} songid={e.id} title={e.title} />;
+          })}
         </TrackPlacementContainer>
       </TrackContainer>
     </StyledContainer>
