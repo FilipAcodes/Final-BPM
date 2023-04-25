@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import AudioPlayer from "./AudioPlayer";
 import SongAddComment from "../CommentComponents/SongAddComment";
 import LikeButton from "../LikedSongComponents/LikeButton";
 import AddToPlayList from "../PlaylistComponents/AddToPlayList";
 import { useNavigate } from "react-router-dom";
+import SongComments from "../CommentComponents/SongComments";
 
 const DetailsForSong = ({
   songName,
@@ -16,12 +17,15 @@ const DetailsForSong = ({
   artistid,
   albumid,
 }) => {
+  const [reload, setReload] = useState(false);
+  console.log(album);
   const navigate = useNavigate();
   return (
     <>
       <StyledContainer>
         <LeftColumn>
           <div>
+            {/* {} */}
             <SongName>{songName}</SongName>
             <ArtistMoreInfo onClick={() => navigate(`/artist/${artistid}`)}>
               <ArtistImage src={artist.picture} alt="Artist" />
@@ -39,18 +43,20 @@ const DetailsForSong = ({
                 picture={artist.picture}
               />
             </StyledContainerForLikePlayList>
-            <SongAddComment />
+            <SongAddComment setReload={setReload} />
+            {/* {} */}
           </div>
+          <SongComments reload={reload} />
         </LeftColumn>
         <RightColumn>
           <AlbumAndPlayerContainer>
             <AlbumTitle>{album.title}</AlbumTitle>
             <AlbumImage
-              src={album.cover_xl}
+              src={album.cover_big}
               alt="Album Cover"
               onClick={() => navigate(`/album/${albumid}`)}
             ></AlbumImage>
-            <AudioPlayer mp3={mp3} width={`90%`} />
+            <AudioPlayer mp3={mp3} width={`70%`} />
             {explicit && <ExplicitBold>EXPLICIT</ExplicitBold>}
           </AlbumAndPlayerContainer>
         </RightColumn>
@@ -62,9 +68,8 @@ const DetailsForSong = ({
 export default DetailsForSong;
 
 const StyledContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -95,17 +100,20 @@ const SongName = styled.h1`
     height: 69px;
     overflow: scroll;
   }
+  @media (max-width: 1130px) and (min-width: 376px) {
+    grid-template-columns: 1fr;
+    font-size: 30px;
+  }
 `;
 
 const AlbumAndPlayerContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 10px;
 `;
 
 const AlbumImage = styled.img`
-  max-width: 90%;
+  width: 70%;
   &:hover {
     cursor: pointer;
   }
@@ -113,17 +121,20 @@ const AlbumImage = styled.img`
 
 const LeftColumn = styled.div`
   margin-top: 15px;
-  width: 60%;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr;
   @media (max-width: 375px) {
+    grid-template-columns: 1fr;
+  }
+  @media (max-width: 1130px) and (min-width: 376px) {
     grid-template-columns: 1fr;
   }
 `;
 
 const RightColumn = styled.div`
-  width: 40%;
+  width: 100%;
+  margin-right: 10px;
   @media (max-width: 375px) {
     height: 150px;
     margin-top: 13px;
@@ -137,6 +148,9 @@ const AlbumTitle = styled.h3`
     height: 75px;
     width: 109px;
     overflow: scroll;
+  }
+  @media (max-width: 1130px) and (min-width: 376px) {
+    font-size: 30px;
   }
 `;
 

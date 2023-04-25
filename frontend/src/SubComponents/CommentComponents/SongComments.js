@@ -39,7 +39,9 @@ const StyledCommentContainer = styled.div`
   overflow: auto;
   margin-left: 10px;
   margin-top: 5px;
-  @media (min-width: 1571px) {
+  width: 100%;
+  height: 80%;
+  /* @media (min-width: 1571px) {
     position: absolute;
     top: 7%;
     left: 42%;
@@ -77,5 +79,5 @@ const StyledCommentContainer = styled.div`
     top: 4%;
     left: 28%;
     width: 900px;
-  }
+  } */
 `;

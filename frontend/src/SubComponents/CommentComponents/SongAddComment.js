@@ -2,13 +2,11 @@ import { useAuth0 } from "@auth0/auth0-react";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import SongComments from "../CommentComponents/SongComments";
 import ToastNotification from "../ToastNotification";
 
-const SongAddComment = () => {
+const SongAddComment = ({ setReload }) => {
   const { songId } = useParams();
   const [addComment, setAddComment] = useState("");
-  const [reload, setReload] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
   const { user } = useAuth0();
 
@@ -34,7 +32,7 @@ const SongAddComment = () => {
         .then((response) => response.json())
         .then((data) => {
           setAddComment("");
-          setReload(!reload);
+          setReload((prev) => !prev);
         });
     }
   };
@@ -55,9 +53,6 @@ const SongAddComment = () => {
           Submit
         </SubmitButton>
       </CommentContainer>
-      <div>
-        <SongComments reload={reload} />
-      </div>
       <ToastNotification
         message="Please log-in to submit your message"
         show={signedIn}
