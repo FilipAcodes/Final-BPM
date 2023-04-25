@@ -42,6 +42,11 @@ const SearchBar = () => {
         </InputContainer>
       </SearchContainer>
       <SearchResultsContainer>
+        {!input && (
+          <StyledInitialMessage>
+            <p>Enter a song, an artist or an album and click search!</p>
+          </StyledInitialMessage>
+        )}
         {search &&
           getPageResults().map((e) => {
             return (
@@ -78,7 +83,7 @@ const InputField = styled.input`
   height: 38px;
   padding: 10px;
   border-radius: 5px;
-  width: 500px;
+  width: 100%;
   border: 1px solid #ccc;
   @media (max-width: 375px) {
     width: 191px;
@@ -126,5 +131,23 @@ const SearchResultsContainer = styled.div`
     width: 300px;
     margin-left: 20px;
     margin-top: -5px;
+  }
+`;
+
+const StyledInitialMessage = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 250px;
+  height: 128px;
+  background-color: black;
+  color: white;
+  border-radius: 8px;
+  border: 2px solid #9d00ff;
+  padding: 5px;
+  p {
+    text-align: center;
+    font-size: 25px;
   }
 `;
