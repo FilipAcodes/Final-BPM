@@ -29,6 +29,13 @@ const StyledContainer = styled.div`
   @media (max-width: 632px) and (min-width: 376px) {
     width: 450px;
   }
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: #9d00ff;
+    border: 2px solid white;
+    color: black;
+  }
 `;
 
 const StyledButtonSong = styled.button`

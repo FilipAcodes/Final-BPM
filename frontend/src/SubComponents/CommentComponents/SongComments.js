@@ -41,43 +41,4 @@ const StyledCommentContainer = styled.div`
   margin-top: 5px;
   width: 100%;
   height: 80%;
-  /* @media (min-width: 1571px) {
-    position: absolute;
-    top: 7%;
-    left: 42%;
-    width: 500px;
-    transform: translate(-50%, -50%);
-  }
-  @media (max-width: 375px) {
-    width: 275px;
-    height: 250px;
-    margin-left: 10px;
-    margin-top: 5px;
-  }
-  @media (max-width: 1450px) and (min-width: 1381px) {
-    position: absolute;
-    top: 7%;
-    left: 42%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-  }
-  @media (max-width: 1570px) and (min-width: 1451px) {
-    width: 400px;
-    position: absolute;
-    top: 7%;
-    left: 42%;
-    transform: translate(-50%, -50%);
-  }
-  @media (max-width: 1380px) and (min-width: 1340px) {
-    position: absolute;
-    top: 4%;
-    left: 28%;
-    width: 380px;
-  }
-  @media (max-width: 1339px) and (min-width: 376x) {
-    position: absolute;
-    top: 4%;
-    left: 28%;
-    width: 900px;
-  } */
 `;

@@ -79,8 +79,13 @@ const StyledContainer = styled.div`
     width: 290px;
     left: 56%;
   }
-  @media (max-width: 966px) and (min-width: 376px) {
+  @media (max-width: 966px) and (min-width: 701px) {
     height: 700px;
+  }
+  @media (max-width: 700px) and (min-width: 376px) {
+    height: 700px;
+    width: 320px;
+    left: 56%;
   }
 `;
 

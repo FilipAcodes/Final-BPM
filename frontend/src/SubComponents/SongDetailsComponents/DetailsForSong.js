@@ -18,14 +18,13 @@ const DetailsForSong = ({
   albumid,
 }) => {
   const [reload, setReload] = useState(false);
-  console.log(album);
   const navigate = useNavigate();
+
   return (
     <>
       <StyledContainer>
         <LeftColumn>
           <div>
-            {/* {} */}
             <SongName>{songName}</SongName>
             <ArtistMoreInfo onClick={() => navigate(`/artist/${artistid}`)}>
               <ArtistImage src={artist.picture} alt="Artist" />
@@ -44,7 +43,6 @@ const DetailsForSong = ({
               />
             </StyledContainerForLikePlayList>
             <SongAddComment setReload={setReload} />
-            {/* {} */}
           </div>
           <SongComments reload={reload} />
         </LeftColumn>
