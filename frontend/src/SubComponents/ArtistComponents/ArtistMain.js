@@ -29,7 +29,6 @@ const ArtistMain = () => {
       <TrackContainer>
         {artistInfo &&
           paginatedTracks.map((e) => {
-            console.log(e);
             return (
               <ArtistSpecificInfo
                 key={e.id}
