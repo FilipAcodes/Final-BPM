@@ -30,9 +30,7 @@ const ArtistMain = () => {
 
   return (
     <StyledContainer>
-      <StyledTitle>
-        Top 50 tracks by {artistInfo && artistInfo[0].artist.name}
-      </StyledTitle>
+      <StyledTitle>Top 50 tracks by {artistInfo[0].artist.name}</StyledTitle>
       <TrackContainer>
         {paginatedTracks.map((e) => {
           return (
