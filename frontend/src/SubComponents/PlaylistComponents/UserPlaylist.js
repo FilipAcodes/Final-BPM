@@ -2,11 +2,13 @@ import { useAuth0 } from "@auth0/auth0-react";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import UserSelectedPlaylist from "./UserSelectedPlaylist";
+import PageLoad from "../../PageLoad";
 
 const UserPlaylist = () => {
   const { user } = useAuth0();
   const [userPlaylist, setUserPlaylist] = useState(null);
   const [selectedPlaylist, setSelectedPlaylist] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (user) {
@@ -15,10 +17,13 @@ const UserPlaylist = () => {
         .then((data) => {
           if (data.status === 200) {
             setUserPlaylist(data.data);
+            setLoading(false);
           }
         });
     }
   }, [user]);
+
+  if (loading) return <PageLoad />;
 
   return (
     <>
@@ -26,23 +31,22 @@ const UserPlaylist = () => {
       <OptionsForPlaylist
         id="playlist"
         onChange={(e) => setSelectedPlaylist(e.target.value)}
-        requi
+        defaultValue=""
       >
         <option selected defaultValue="" key="default" disabled>
           Select a playlist!
         </option>
-        {userPlaylist &&
-          userPlaylist.playlists.map((e, i) => {
-            return (
-              <option key={i} value={e.playlistname}>
-                {e.playlistname}
-              </option>
-            );
-          })}
+        {userPlaylist.playlists.map((e, i) => {
+          return (
+            <option key={i} value={e.playlistname}>
+              {e.playlistname}
+            </option>
+          );
+        })}
       </OptionsForPlaylist>
       <UserSelectedPlaylist
         selectedplaylist={selectedPlaylist}
-        userPlaylist={userPlaylist?.playlists}
+        userPlaylist={userPlaylist.playlists}
       />
     </>
   );

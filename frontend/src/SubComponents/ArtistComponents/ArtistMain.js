@@ -2,18 +2,23 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import ArtistSpecificInfo from "./ArtistSpecificInfo";
+import PageLoad from "../../PageLoad";
 
 const ArtistMain = () => {
   const { artistId } = useParams();
   const [artistInfo, setArtistInfo] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   const PAGE_SIZE = 10;
 
   useEffect(() => {
     fetch(`/deezerapi/artist/${artistId}`)
       .then((res) => res.json())
-      .then((data) => setArtistInfo(data.data));
+      .then((data) => {
+        setArtistInfo(data.data);
+        setLoading(false);
+      });
   }, []);
   //Page Logic/Divide/button count/Similar to search
   const pageCount = artistInfo ? Math.ceil(artistInfo.length / PAGE_SIZE) : 0;
@@ -21,23 +26,24 @@ const ArtistMain = () => {
     ? artistInfo.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE)
     : [];
 
+  if (loading) return <PageLoad />;
+
   return (
     <StyledContainer>
       <StyledTitle>
         Top 50 tracks by {artistInfo && artistInfo[0].artist.name}
       </StyledTitle>
       <TrackContainer>
-        {artistInfo &&
-          paginatedTracks.map((e) => {
-            return (
-              <ArtistSpecificInfo
-                key={e.id}
-                title={e.title}
-                id={e.id}
-                album={e.album}
-              />
-            );
-          })}
+        {paginatedTracks.map((e) => {
+          return (
+            <ArtistSpecificInfo
+              key={e.id}
+              title={e.title}
+              id={e.id}
+              album={e.album}
+            />
+          );
+        })}
       </TrackContainer>
       <PaginationContainer>
         <PaginationButton

@@ -7,27 +7,24 @@ const UserSelectedPlaylist = ({ selectedplaylist, userPlaylist }) => {
     <>
       <Container>
         <StyledSongContainer>
-          {selectedplaylist && (
-            <StyledPlaylistFor>
-              Playlist for: {selectedplaylist}
-            </StyledPlaylistFor>
-          )}
-          {userPlaylist &&
-            userPlaylist.map((e) => {
-              if (e.playlistname === selectedplaylist) {
-                return e.songs.map((usersongs) => {
-                  return (
-                    <SongInformationNav
-                      key={usersongs.Id}
-                      songname={usersongs.songName}
-                      picture={usersongs.picture}
-                      artist={usersongs.artistName}
-                      songid={usersongs.songId}
-                    />
-                  );
-                });
-              }
-            })}
+          <StyledPlaylistFor>
+            Playlist for: {selectedplaylist}
+          </StyledPlaylistFor>
+          {userPlaylist.map((e) => {
+            if (e.playlistname === selectedplaylist) {
+              return e.songs.map((usersongs) => {
+                return (
+                  <SongInformationNav
+                    key={usersongs.Id}
+                    songname={usersongs.songName}
+                    picture={usersongs.picture}
+                    artist={usersongs.artistName}
+                    songid={usersongs.songId}
+                  />
+                );
+              });
+            }
+          })}
         </StyledSongContainer>
       </Container>
     </>

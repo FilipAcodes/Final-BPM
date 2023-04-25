@@ -3,6 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import styled from "styled-components";
 import { useState } from "react";
 import SongInformationNav from "../SongInformationNav";
+import PageLoad from "../../PageLoad";
 
 const LikedSongInformation = () => {
   const { user } = useAuth0();
@@ -16,22 +17,23 @@ const LikedSongInformation = () => {
     }
   }, []);
 
+  if (!songInformation) return <PageLoad />;
+
   return (
     <StyledSongInformationContainer>
       <StyledTitle>Your favorited songs!</StyledTitle>
       <StyledSongContainer>
-        {songInformation &&
-          songInformation.map((song) => {
-            return (
-              <SongInformationNav
-                key={song.songid}
-                songid={song.songid}
-                songname={song.songname}
-                artist={song.artist}
-                picture={song.picture}
-              />
-            );
-          })}
+        {songInformation.map((song) => {
+          return (
+            <SongInformationNav
+              key={song.songid}
+              songid={song.songid}
+              songname={song.songname}
+              artist={song.artist}
+              picture={song.picture}
+            />
+          );
+        })}
       </StyledSongContainer>
     </StyledSongInformationContainer>
   );
