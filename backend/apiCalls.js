@@ -1,6 +1,8 @@
 "use strict";
 const axios = require("axios");
-//Single Track info get
+//Every api call here is directed to deezer's API
+
+//Simple GET to obtain info on a single track.
 const getTrackInfo = async (req, res) => {
   const { trackid } = req.params;
   try {
@@ -10,7 +12,7 @@ const getTrackInfo = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-//General query(search bar)
+//The main "meat" of the application, it searches anything that matches the query and returns it.
 const getSongSearch = async (req, res) => {
   const { query } = req.params;
   try {
@@ -22,7 +24,7 @@ const getSongSearch = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-//Album tracks get
+//Returns all of the tracks from an album, based on it's ID
 const getAlbumTracks = async (req, res) => {
   const { albumid } = req.params;
   try {
@@ -36,7 +38,7 @@ const getAlbumTracks = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-//Artist tracks get
+//Returns all of the tracks from an artist, based on it's ID
 const getArtistTracks = async (req, res) => {
   const { artistid } = req.params;
   try {
