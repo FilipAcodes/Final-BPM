@@ -2,7 +2,7 @@
 
 ## Project name : BPM
 
-This is a full stack application using React therefore it will require 2 terminals to run.
+This is a full stack application using React & node.js therefore it will require 2 terminals to run.
 
 Navigate to the backend and do npm install, open another terminal and do the same for the frontend.
 
