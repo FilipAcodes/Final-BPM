@@ -3,7 +3,12 @@ const { MongoClient } = require("mongodb");
 require("dotenv").config();
 const { MONGO_URI } = process.env;
 const options = { useNewUrlParser: true, useUnifiedTopology: true };
-//Like song
+//All of the calls here use mongoDB, make sure you have the proper .env file setup
+
+//A patch endpoint that requires email, the song id, the song name, the picture* and the artist*
+//* The two are for making the transition easier, instead of refetching every single song
+// once the user decides to swap.
+//It also activates the liked button if it is not arleady liked, or removes/ deactivates the likebutton
 const likeSong = async (req, res) => {
   const { email, songid, songname, picture, artist } = req.body;
 
@@ -74,7 +79,11 @@ const likeSong = async (req, res) => {
     }
   }
 };
+
 //create Playlist
+//a POST endpoint that creates a playlist, needs the playlist's name and the user's email to create.
+//It can also add songs to the either newly created playlist, or to a different playlist
+//using mongoDB's upsert function
 const createPlaylist = async (req, res) => {
   const { email, playlist, songName, artistName, songId, picture } = req.body; // only playlist name & email is required
   const client = new MongoClient(MONGO_URI, options);
@@ -129,6 +138,7 @@ const createPlaylist = async (req, res) => {
 };
 
 //get all user's playlist
+//A simple GET to the database that gives back the user's playlist(s)
 const getUserPlaylist = async (req, res) => {
   const { email } = req.params;
   const client = new MongoClient(MONGO_URI, options);
@@ -146,6 +156,7 @@ const getUserPlaylist = async (req, res) => {
       });
 };
 //get specific Song
+//Simple GET to the database to  get a single of the user's liked songs
 const getUserLikedSong = async (req, res) => {
   const { songid } = req.params;
   const client = new MongoClient(MONGO_URI, options);
@@ -169,6 +180,7 @@ const getUserLikedSong = async (req, res) => {
 };
 
 //all songs liked by user
+//Simple GET to the database to  get all of the user's liked songs
 const getAllUserLikedSongs = async (req, res) => {
   const { email } = req.params;
   const client = new MongoClient(MONGO_URI, options);
@@ -190,6 +202,7 @@ const getAllUserLikedSongs = async (req, res) => {
     : res.status(404).json({ status: 404, message: "No liked songs found." });
 };
 //create Comment on song
+//POST that gets sent to the database, requires the songid, the comment and the user's email to be valid
 
 const createCommentOnSong = async (req, res) => {
   const { songid, comment, email } = req.body;
@@ -216,6 +229,7 @@ const createCommentOnSong = async (req, res) => {
 };
 
 //Get all comments on a song
+//Returns all of the comments on the song based on it's song id, directly connected to the database.
 const getAllCommentsOnSong = async (req, res) => {
   const { songid } = req.params;
   const client = new MongoClient(MONGO_URI, options);
