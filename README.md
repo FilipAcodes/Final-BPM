@@ -2,7 +2,7 @@
 
 ## Project name : BPM
 
-This is a full stack application (front-end & back-end) therefore it will require 2 terminals to run.
+This is a full stack application using React therefore it will require 2 terminals to run.
 
 Navigate to the backend and do npm install, open another terminal and do the same for the frontend.
 
@@ -21,7 +21,7 @@ Video showcase: [BPM project showcase](someplace.com)
 - **Album Page** : A page showing all of the songs on the album.
 - **Sidebar**: A retractable sidebar on the left side, that shows the menu/options available to the user depending on if they are logged in.
 
-- **THE FEATURES BELOW ARE ONLY AVAILABLE TO THE USER IF THEY ARE LOGGED IN.**
+-- **THE FEATURES BELOW ARE ONLY AVAILABLE TO THE USER IF THEY ARE LOGGED IN.** --
 
 - **LikeButton** : The user can like songs and add them to the "Liked songs Playlist"
 - **Comments**: The user can add their comments to the song.
