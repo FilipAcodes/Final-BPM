@@ -17,6 +17,7 @@ Video showcase: [BPM project showcase](someplace.com)
 - **Database**: The application uses mongoDB, certain .env files are required to store the data.
 - **Search**: The application uses Deezer's api to lookup and obtain 25 of the closest matches to the search query received.
 - **QueryInformation** : Once the user has selected an item, it will be redirected to a page containing the song's name, the artist, a small preview of the song, the album name, the comment section, like & add to playlist feature.
+- **Song Preview**: A small 30 second sample is provided.
 - **Artist Page** : A page showing the artist's top 50 songs.
 - **Album Page** : A page showing all of the songs on the album.
 - **Sidebar**: A retractable sidebar on the left side, that shows the menu/options available to the user depending on if they are logged in.

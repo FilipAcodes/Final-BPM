@@ -48,17 +48,14 @@ const Modal = ({ isOpen, onClose, id, songname, artist, picture }) => {
                 <option disabled selected value="default">
                   Select a playlist!
                 </option>
-                {userPlaylist ? (
+                {userPlaylist &&
                   userPlaylist.playlists.map((e, i) => {
                     return (
                       <option key={i} value={e.playlistname}>
                         {e.playlistname}
                       </option>
                     );
-                  })
-                ) : (
-                  <option>Loading...</option>
-                )}
+                  })}
               </select>
               {selectedPlaylist && (
                 <>

@@ -37,7 +37,7 @@ const CreatePlaylistButton = () => {
       <form onSubmit={submitAndCreate}>
         <input value={playlistName} onChange={createPlaylist}></input>
         <CreatePlaylistButtons type="submit" disabled={loading}>
-          {loading ? <Loading /> : " Create a playlist"}
+          {loading ? <Loading /> : "Create a playlist"}
         </CreatePlaylistButtons>
       </form>
       <ToastNotification

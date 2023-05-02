@@ -31,9 +31,8 @@ const UserPlaylist = () => {
       <OptionsForPlaylist
         id="playlist"
         onChange={(e) => setSelectedPlaylist(e.target.value)}
-        defaultValue=""
       >
-        <option selected defaultValue="" key="default" disabled>
+        <option disabled selected value="default">
           Select a playlist!
         </option>
         {userPlaylist.playlists.map((e, i) => {
@@ -44,6 +43,7 @@ const UserPlaylist = () => {
           );
         })}
       </OptionsForPlaylist>
+
       <UserSelectedPlaylist
         selectedplaylist={selectedPlaylist}
         userPlaylist={userPlaylist.playlists}

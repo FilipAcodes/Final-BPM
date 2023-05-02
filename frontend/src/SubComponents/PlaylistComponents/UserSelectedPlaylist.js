@@ -7,9 +7,11 @@ const UserSelectedPlaylist = ({ selectedplaylist, userPlaylist }) => {
     <>
       <Container>
         <StyledSongContainer>
-          <StyledPlaylistFor>
-            Playlist for: {selectedplaylist}
-          </StyledPlaylistFor>
+          {selectedplaylist && (
+            <StyledPlaylistFor>
+              Playlist for: {selectedplaylist}
+            </StyledPlaylistFor>
+          )}
           {userPlaylist.map((e) => {
             if (e.playlistname === selectedplaylist) {
               return e.songs.map((usersongs) => {
