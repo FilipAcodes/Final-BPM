@@ -8,7 +8,7 @@ Navigate to the backend and do npm install, open another terminal and do the sam
 
 To run the project, once the package.json has been installed, start it up with npm start on the frontend and again for the backend.
 
-Video showcase: [BPM project showcase](youtube.com)
+Video showcase: [BPM project showcase](https://www.youtube.com/watch?v=QAm2bYZvByk)
 
 ## Features:
 
