@@ -1,7 +1,6 @@
 "use strict";
 const { MongoClient } = require("mongodb");
 require("dotenv").config();
-const { v4: uuidv4 } = require("uuid");
 const { MONGO_URI } = process.env;
 const options = { useNewUrlParser: true, useUnifiedTopology: true };
 //All of the calls here use mongoDB, make sure you have the proper .env file setup
