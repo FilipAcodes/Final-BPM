@@ -1,6 +1,7 @@
 "use strict";
 const { MongoClient } = require("mongodb");
 require("dotenv").config();
+const { v4: uuidv4 } = require("uuid");
 const { MONGO_URI } = process.env;
 const options = { useNewUrlParser: true, useUnifiedTopology: true };
 //All of the calls here use mongoDB, make sure you have the proper .env file setup
@@ -210,8 +211,10 @@ const createCommentOnSong = async (req, res) => {
   await client.connect();
   const db = client.db("finalbpm");
 
+  const emailTrimmer = email.split("@")[0].toString();
+
   const newComment = {
-    _id: email,
+    _id: emailTrimmer,
     comment,
   };
 
